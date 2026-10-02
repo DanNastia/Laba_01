@@ -8,11 +8,11 @@ from toolkit.convecter import convector
 def print_help():
 
     help_information = (
-        "Лабораторная работа 01"
-        "Возможные команды:\n"
-        "  python -m toolkit calc \"EXPRESSION\""
-        "  python -m toolkit convert VALUE --from UNIT --to UNIT"
-        "  python -m toolkit --help"
+        "Лабораторная работа 01\n"
+        "Возможные команды калькулятора-конвертора:\n"
+        "  python -m toolkit calc \"EXPRESSION\"\n"
+        "  python -m toolkit convert VALUE --from UNIT --to UNIT\n"
+        "  python -m toolkit --help\n"
     )
     print(help_information)
 

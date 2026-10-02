@@ -63,7 +63,7 @@ def convector(value, input_unit, output_unit):
             expected_value = measurements[output_category][output_unit]
             return float(value * base_value / expected_value)
 
-    if input_category == 'temputure':
+    if input_category == 'temperature':
 
 # проверка на совпадение величин(то есть конверсия не должна происходить)
         if input_unit == output_unit:
