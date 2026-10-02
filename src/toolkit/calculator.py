@@ -39,7 +39,7 @@ def tokenization(expression: str):
 def validation(tokens: list):
 
     if not tokens:
-        raise ValueError(f"Выражение не может быть пустым")
+        raise validation_Error(f"Выражение не может быть пустым")
 
     binared_operators = ['+', '-', '*', '/'] #поддерживаемые операторы для счёта
     number_of_brackets = 0

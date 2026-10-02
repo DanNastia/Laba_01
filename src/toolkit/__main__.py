@@ -7,11 +7,11 @@ from toolkit.convecter import convector
 def print_help():
 
     help_information = (
-        "Лабораторная работа 1"
-        "Использование:\n"
-        "  python -m toolkit calc \"EXPRESSION\"                  - Вычисление математического выражения\n"
-        "  python -m toolkit convert VALUE --from UNIT --to UNIT - Конвертер величин\n"
-        "  python -m toolkit --help                            - Показать справку help\n"
+        "Лабораторная работа 01"
+        "Возможные команды:\n"
+        "  python -m toolkit calc \"EXPRESSION\""
+        "  python -m toolkit convert VALUE --from UNIT --to UNIT"
+        "  python -m toolkit --help"
     )
     print(help_information)
 

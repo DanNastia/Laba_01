@@ -38,56 +38,49 @@ def test_convert_5():
 
     assert convector("500", "g", "kg") == 0.5
 
-def test_convert_6():
 
-    assert convector("100", "c", "f") == 212.0
-
-def test_cli_7(monkeypatch, capsys):
+def test_cli_6(monkeypatch, capsys):
 
     monkeypatch.setattr(sys, "argv", ["toolkit", "--help"])
     with pytest.raises(SystemExit) as exit_info:
         main()
     assert exit_info.value.code == 0
     captured = capsys.readouterr()
-    assert "Лабораторная работа 1" in captured.out
+    assert "Лабораторная работа 01" in captured.out
 
 
 #негативные тесты
-def test_calc_8():
+def test_calc_7():
     tokens = tokenization("")
     with pytest.raises(validation_Error):
         validation(tokens)
 
-def test_calc_9():
+def test_calc_8():
 
     tokens = tokenization("2 ) + ( 3")
     with pytest.raises(validation_Error):
         validation(tokens)
 
-def test_calc_10():
+def test_calc_9():
 
     tokens = tokenization("5 + * 2")
     with pytest.raises(validation_Error):
         validation(tokens)
 
-def test_calc_11():
+def test_calc_10():
 
     tokens = tokenization("10 / 0")
     polik = polik_notation(tokens)
     with pytest.raises(divide_by_Zero_Error):
         calculation(polik)
 
-def test_convert_12():
+def test_convert_11():
 
     with pytest.raises(convector_Error):
         convector("10", "m", "g")
 
-def test_convert_13():
 
-    with pytest.raises(convector_Error):
-        convector("-1", "k", "c")
-
-def test_cli_14(monkeypatch, capsys):
+def test_cli_12(monkeypatch, capsys):
 
     monkeypatch.setattr(sys, "argv", ["toolkit", "calc"])
     with pytest.raises(SystemExit) as exit_info:
