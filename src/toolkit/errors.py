@@ -1,3 +1,4 @@
+# разные классы технических ошибок калькулятора-конвертора
 class toolkit_Error(Exception):
     pass
 class divide_by_Zero_Error(toolkit_Error):

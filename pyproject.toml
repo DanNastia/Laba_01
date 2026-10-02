@@ -1,4 +1,4 @@
-[project]
+[ project ]
 name = "toolkit"
 version = "1.0"
 description = "Калькулятор и конвертер величин"

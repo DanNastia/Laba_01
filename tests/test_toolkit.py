@@ -6,7 +6,7 @@ from toolkit.convecter import convector
 from toolkit.errors import validation_Error, divide_by_Zero_Error, convector_Error
 from toolkit.__main__ import main
 
-#положительные тесты
+# положительные тесты
 def test_calc_1():
 
     tokens = tokenization("2 + 3 * 4")
@@ -17,6 +17,7 @@ def test_calc_1():
     assert calculation(polik) == 14.0
 
 def test_calc_2():
+
     tokens = tokenization("2.5 + 1.25")
     assert tokens == ['2.5', '+', '1.25']
     assert validation(tokens) is True
@@ -25,6 +26,7 @@ def test_calc_2():
     assert calculation(polik) == 3.75
 
 def test_calc_3():
+
     tokens = tokenization("-5 + 3")
     assert validation(tokens) is True
     polik = polik_notation(tokens)
@@ -49,8 +51,9 @@ def test_cli_6(monkeypatch, capsys):
     assert "Лабораторная работа 01" in captured.out
 
 
-#негативные тесты
+# негативные тесты
 def test_calc_7():
+
     tokens = tokenization("")
     with pytest.raises(validation_Error):
         validation(tokens)

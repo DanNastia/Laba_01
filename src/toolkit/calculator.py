@@ -2,8 +2,8 @@ from .errors import divide_by_Zero_Error, validation_Error, toolkit_Error
 
 
 def tokenization(expression: str):
-    tokens = [] #хранилище чисел и знаков
-    current_char_in_string = 0 #текущий символ строки
+    tokens = [] # хранилище чисел и операндов
+    current_char_in_string = 0 # текущий символ строки
     length_of_the_expression = len(expression)
 
     while current_char_in_string < length_of_the_expression:
@@ -22,7 +22,7 @@ def tokenization(expression: str):
                 tokens.append(number_str)
                 continue
 
-#отдельно сохраняем все операции и скобочк
+# отдельно сохраняем все операции и скобочк
         if char in '+-*/()':
             tokens.append(char)
             current_char_in_string += 1
@@ -31,7 +31,7 @@ def tokenization(expression: str):
 
         raise toolkit_Error(f"Недопустимый символ в выражении: {char}")
 
-    return tokens #возращаем обработаную строку
+    return tokens # возращаем обработаную строку
 
 
 
@@ -41,7 +41,7 @@ def validation(tokens: list):
     if not tokens:
         raise validation_Error(f"Выражение не может быть пустым")
 
-    binared_operators = ['+', '-', '*', '/'] #поддерживаемые операторы для счёта
+    binared_operators = ['+', '-', '*', '/'] # поддерживаемые операторы для счёта
     number_of_brackets = 0
 
     for i in range(len(tokens)):
@@ -61,10 +61,10 @@ def validation(tokens: list):
 
         if current_char in binared_operators:
 
-    #проверка на то унарный + и - или нет
+    # проверка на то унарный + и - или нет
                     unary_operands = (current_char in ['+', '-']) and (i == 0 or tokens[i-1] in binared_operators or tokens[i-1] == '(')
 
-    #обработка унарных знаков
+    # обработка унарных знаков
                     if unary_operands:
 
                         if i == len(tokens) - 1:
@@ -78,18 +78,18 @@ def validation(tokens: list):
                         continue
 
 
-    #обработка оставшихся операндов
+    # обработка оставшихся операндов
                     if i == 0 and current_char in ['*', '/']:
                         raise validation_Error(f"Выражение не может начинаться с умножения или деления")
 
-                    # Бинарный оператор не может быть в самом конце строки
+                    # проверка на нахождение опранда в конце строки
                     if i == len(tokens) - 1:
                         raise validation_Error(f"Выражение не может заканчиваться знаком операции")
 
                     next_char = tokens[i+1]
 
                     if next_char in binared_operators:
-                            raise validation_Error(f"Два знака бинарных операции не могут стоять рядом")
+                            raise validation_Error(f"Два знака операции не могут стоять рядом")
 
 
                     if next_char == ')':
@@ -100,13 +100,13 @@ def validation(tokens: list):
                             raise validation_Error(f"Пропущен операнд перед бинарным оператором")
 
     if number_of_brackets != 0:
-        raise validation_Error(f"Есть незакрытые скобки")
+        raise validation_Error(f"В выражени есть незакрытые скобки")
 
     return True
 
 
 
-#функция перевода выражения в обратнуюю польскую нотацию
+# функция перевода выражения в обратнуюю польскую нотацию
 def polik_notation(tokens):
 
     priorities = {'+': 1, '-': 1, '*': 2, '/': 2}
@@ -118,16 +118,14 @@ def polik_notation(tokens):
         token = tokens[i]
 
         if token in ['+', '-']:
-
             unary_check = (i == 0 or tokens[i-1] == '(')
             if unary_check:
                 possible_unary__tokens.append('0')
-
         possible_unary__tokens.append(token)
 
 
     for token in possible_unary__tokens:
-#проверка на то символ число или операнд
+# проверка на то символ - число или операнд
         if token not in priorities and token not in ['(',')']:
             output_string.append(float(token))
 
@@ -139,9 +137,9 @@ def polik_notation(tokens):
             while stack and stack[-1] != '(':
                 output_string.append(stack.pop())
 
-            stack.pop()# Удаляем саму открывающую скобку из стэка
+            stack.pop()# удаляем саму открывающую скобку из стэка
 
-#основной алгоритм обратной польской нотации
+# основной алгоритм обратной польской нотации
         elif token in priorities:
             while (stack and stack[-1] in priorities and priorities[stack[-1]] >= priorities[token]):
                 output_string.append(stack.pop())
@@ -149,7 +147,7 @@ def polik_notation(tokens):
             # Кладем текущий оператор в стек
             stack.append(token)
 
-    # 3. Когда токены закончились, выталкиваем все оставшиеся операторы из стека в очередь
+    # когда токены закончились, выталкиваем все оставшиеся операторы из стека в очередь
     while stack:
         output_string.append(stack.pop())
 
@@ -157,19 +155,19 @@ def polik_notation(tokens):
 
 
 
-
+# основная программа калькулятора
 def calculation(polik_tokens):
 
     stack = []
 
     for token in polik_tokens:
-    #если число, то кладываем в стэк
+    # если число, то кладываем в стэк
         if type(token) is float:
             stack.append(token)
 
         elif token in '+-*/':
 
-    #из стека первым достается правый операнд, а вторым — левый.
+    # из стека первым достается правый операнд, а вторым — левый (сверху вниз как тарелочки)
             right_num = stack.pop()
             left_num = stack.pop()
 
@@ -186,7 +184,7 @@ def calculation(polik_tokens):
                     raise divide_by_Zero_Error(f"Деление на ноль запрещено")
                 result_of_calc = left_num / right_num
 
-    #возращаем вычисленное значение в стэк
+    # возращаем вычисленное значение в стэк
             stack.append(result_of_calc)
 
     return stack[0]
