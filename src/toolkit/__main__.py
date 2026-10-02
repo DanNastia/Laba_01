@@ -7,7 +7,7 @@ from toolkit.convecter import convector
 def print_help():
 
     help_information = (
-        "Лабораторная работа 1. Консольный набор утилит\n\n"
+        "Лабораторная работа 1"
         "Использование:\n"
         "  python -m toolkit calc \"EXPRESSION\"                  - Вычисление математического выражения\n"
         "  python -m toolkit convert VALUE --from UNIT --to UNIT - Конвертер величин\n"
@@ -78,5 +78,5 @@ def main():
 
 
 
-if __name__ == '_main_':
+if __name__ == '__main__':
     main()

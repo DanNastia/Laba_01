@@ -4,7 +4,7 @@ import pytest
 from toolkit.calculator import tokenization, validation, polik_notation, calculation
 from toolkit.convecter import convector
 from toolkit.errors import validation_Error, divide_by_Zero_Error, convector_Error
-from toolkit._main_ import main
+from toolkit.__main__ import main
 
 #положительные тесты
 def test_calc_1():
