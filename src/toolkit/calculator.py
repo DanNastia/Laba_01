@@ -1,4 +1,4 @@
-from .errors import divide_by_Zero_Error, validation_Error
+from .errors import divide_by_Zero_Error, validation_Error, toolkit_Error
 
 
 def tokenization(expression: str):
@@ -29,7 +29,7 @@ def tokenization(expression: str):
             continue
 
 
-        raise ValueError(f"Недопустимый символ в выражении: {char}")
+        raise toolkit_Error(f"Недопустимый символ в выражении: {char}")
 
     return tokens #возращаем обработаную строку
 
@@ -72,6 +72,9 @@ def validation(tokens: list):
 
                         if tokens[i+1] == ')':
                             raise validation_Error(f"Знак операции не может стоять перед закрывающей скобкой")
+
+                        if tokens[i+1] in binared_operators:
+                            raise validation_Error(f"Есть ошибка:или пропущен операнд или два оператора подряд")
                         continue
 
 
@@ -86,15 +89,15 @@ def validation(tokens: list):
                     next_char = tokens[i+1]
 
                     if next_char in binared_operators:
-
-                        if next_char in ['+', '-']:
-                            pass
-                        else:
-                            raise validation_Error(f"Два знака операции не могут стоять рядом")
+                            raise validation_Error(f"Два знака бинарных операции не могут стоять рядом")
 
 
                     if next_char == ')':
                         raise validation_Error(f"Знак операции не может стоять перед закрывающей скобкой")
+
+                    if i > 0 and tokens[i-1] == '(':
+                        if current_char in ['*', '/']:
+                            raise validation_Error(f"Пропущен операнд перед бинарным оператором")
 
     if number_of_brackets != 0:
         raise validation_Error(f"Есть незакрытые скобки")
@@ -116,7 +119,7 @@ def polik_notation(tokens):
 
         if token in ['+', '-']:
 
-            unary_check = (i == 0 or tokens[i-1] in priorities or tokens[i-1] == '(')
+            unary_check = (i == 0 or tokens[i-1] == '(')
             if unary_check:
                 possible_unary__tokens.append('0')
 

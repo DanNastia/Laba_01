@@ -5,7 +5,7 @@ measurements = {
 
     'weights': {'g' : 1.0, 'kg' : 1000.0},
 
-    'temputure': {'c','k','f'}
+    'temperature': {'c','k','f'}
 }
 
 
@@ -27,15 +27,15 @@ def convector(value, input_unit, output_unit):
         input_category = 'lenghts'
     elif input_unit in measurements['weights']:
         input_category = 'weights'
-    elif input_unit in measurements['temputure']:
-        input_category = 'temputure'
+    elif input_unit in measurements['temperature']:
+        input_category = 'temperature'
 
     if output_unit in measurements['lenghts']:
         output_category = 'lenghts'
     elif output_unit in measurements['weights']:
         output_category = 'weights'
-    elif output_unit in measurements['temputure']:
-        output_category = 'temputure'
+    elif output_unit in measurements['temperature']:
+        output_category = 'temperature'
 
 
 # проверка полученной категории измерения
