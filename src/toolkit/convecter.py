@@ -1,4 +1,4 @@
-from errors import convector_Error
+from .errors import convector_Error
 
 measurements = {
     'lenghts':{'mm' : 0.001, 'cm' : 0.01,'m' : 1.0,'km' : 1000.0},
@@ -18,6 +18,9 @@ def convector(value, input_unit, output_unit):
     except (ValueError, TypeError):
         raise convector_Error(f"Недопустимое числовое значение: '{value}'")
 
+#инициализация категорий
+    input_category = None
+    output_category = None
 
 #определяем категорию единиц измерения
     if input_unit in measurements['lenghts']:

@@ -1,4 +1,4 @@
-from errors import divide_by_Zero_Error, validation_Error
+from .errors import divide_by_Zero_Error, validation_Error
 
 
 def tokenization(expression: str):
@@ -155,11 +155,11 @@ def polik_notation(tokens):
 
 
 
-def calculation(polixc_tokens):
+def calculation(polik_tokens):
 
     stack = []
 
-    for token in polixc_tokens:
+    for token in polik_tokens:
     #если число, то кладываем в стэк
         if type(token) is float:
             stack.append(token)
